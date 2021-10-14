@@ -143,6 +143,7 @@ function addAnimal(whichAnimal, amountOfAnimal) {
 }
 
 
+
 function setMainAnimal() {
   mainAnimal = animalChooser();
 }
