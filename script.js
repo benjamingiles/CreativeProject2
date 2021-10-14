@@ -128,19 +128,7 @@ function addFox() {
     return fox = {image:imageLink, cat:false, dog: false, fox:true};
 }
 
-function addAnimal(whichAnimal, amountOfAnimal) {
-  for (let i = 0; i < totalAnimals; i++) {
-    if (whichAnimal === 0) {
-      await animalArray.push(addCat());
-    }
-    else if (whichAnimal === 1) {
-      await animalArray.push(addDog());
-    }
-    else if (whichAnimal === 2) {
-      await animalArray.push(addFox());
-    }
-  }
-}
+
 function addAnimal(whichAnimal) {
     if (whichAnimal === 0) {
       await animalArray.push(addCat());
@@ -157,25 +145,43 @@ function setMainAnimal() {
   mainAnimal = animalChooser();
 }
 
-function pickAnimalAmount(animalNum) {
-  let amount = (Math.random() * animalNum) + 1;
-  return amount;
-}
 
 function buildArray() {
-  let totalAnimals = 0;
+  let totalAnimals = 1;
   setMainAnimal();
-  totalAnimals = pickAnimalAmount(9);
-
-  addAnimal(mainAnimal, totalAnimals);
+  addAnimal(mainAnimal);
 
   while (totalAnimals != 9) {
     //todo: add have chose which animal to use then set a number of how much of that via a for loop untill the array has 9 objects.
-    let currentAnimal = animalChooser();
-    while (currentAnimal === mainAnimal) {
-      currentAnimal = animalChooser();
-    }
-    addAnimal(currentAnimal, pickAnimalAmount(9 - totalAnimals));
+    addAnimal(animalChooser());
+    totalAnimals++;
+  }
+}
 
+function scrambleArray() {
+  for (let i = 0; i < 8; i++) {
+    let tempObject = animalArray[i];
+    animalArray[i] = animalArray[i + 1];
+    animalArray[i + 1] = tempObject;
+  }
+  for (let i = 0; i < 8; i++) {
+    let tempObject = animalArray[i];
+    animalArray[i] = animalArray[i + 1];
+    animalArray[i + 1] = tempObject;
+  }
+  for (let i = 1; i < 7; i++) {
+    let tempObject = animalArray[i];
+    animalArray[i] = animalArray[i + 1];
+    animalArray[i + 1] = tempObject;
+  }
+  for (let i = 1; i < 7; i++) {
+    let tempObject = animalArray[i];
+    animalArray[i] = animalArray[i + 1];
+    animalArray[i + 1] = tempObject;
+  }
+  for (let i = 8; i >= 0; i--) {
+    let tempObject = animalArray[i];
+    animalArray[i] = animalArray[i - 1];
+    animalArray[i - 1] = tempObject;
   }
 }
