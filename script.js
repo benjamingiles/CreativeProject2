@@ -35,29 +35,9 @@ fetch(AxolotlURL, {
   });
   */
 
-  fetch(CatURL)
-    .then(function(response) {
-      console.log(response);
-      return response.json();
-    }).then (function(json) {
-      console.log(json);
 
-      results = '<img src="' + json.file + '">';
 
-      document.getElementById("image").innerHTML += results;
-    });
 
-    fetch(DogURL)
-      .then(function(response) {
-        console.log(response);
-        return response.json();
-      }).then (function(json) {
-        console.log(json);
-
-        results += '<img src="' + json.url + '">';
-
-        document.getElementById("image").innerHTML += results;
-      });
 
 //Doesn't work Maybe, not sure;
 /*
@@ -74,17 +54,7 @@ fetch(AxolotlURL, {
         });
 */
 
-fetch(FoxURL)
-  .then(function(response) {
-    console.log(response);
-    return response.json();
-  }).then (function(json) {
-    console.log(json);
 
-    results += '<img src="' + json.image + '">';
-
-    document.getElementById("image").innerHTML += results;
-  });
 
 // has access control allow origin issues
 /*
@@ -100,3 +70,54 @@ fetch(FoxURL)
       document.getElementById("image").innerHTML += results;
     });
 */
+const NumberOfAnimals = 3;
+const SelectedAnimal = math.random() * 3;// 0 = cats, 1 = dogs, 2 = foxes
+//animal = {image:"somelink.png",cat:false, dog:false, fox:false} and other animals if we get them working
+
+function addCat() {
+  let imageLink = "";
+
+  fetch(CatURL)
+    .then(function(response) {
+      console.log(response);
+      return response.json();
+    }).then (function(json) {
+      console.log(json);
+
+      imageLink = json.file;
+    });
+
+    return cat = {image:imageLink, cat:true, dog:false, fox:false};
+}
+
+function addDog() {
+  let imageLink = "";
+
+  fetch(DogURL)
+    .then(function(response) {
+      console.log(response);
+      return response.json();
+    }).then (function(json) {
+      console.log(json);
+
+      imageLink = json.url;
+    });
+
+    return dog = {image:imageLink, cat:false, dog: true, fox:false};
+}
+
+function addFox () {
+  let imageLink = "";
+
+  fetch(FoxURL)
+    .then(function(response) {
+      console.log(response);
+      return response.json();
+    }).then (function(json) {
+      console.log(json);
+
+      imageLink = json.image;
+    });
+
+    return fox = {image:imageLink, cat:false, dog: false, fox:true};
+}
