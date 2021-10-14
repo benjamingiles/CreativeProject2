@@ -35,10 +35,6 @@ fetch(AxolotlURL, {
   });
   */
 
-
-
-
-
 //Doesn't work Maybe, not sure;
 /*
       fetch(DuckURL)
@@ -53,8 +49,6 @@ fetch(AxolotlURL, {
           document.getElementById("image").innerHTML += results;
         });
 */
-
-
 
 // has access control allow origin issues
 /*
@@ -76,9 +70,9 @@ function animalChooser() {
 
 const NumberOfAnimals = 3;
 const SelectedAnimal = animalChooser();// 0 = cats, 1 = dogs, 2 = foxes
-//animal = {image:"somelink.png",cat:false, dog:false, fox:false} and other animals if we get them working
+//animal = {name:"animal name", image:"somelink.png",cat:false, dog:false, fox:false} and other animals if we get them working
 let mainAnimal = 0; // 0 = cats, 1 = dogs, 2 = foxes
-let animalArray;
+let animalArray = [];
 
 function addCat() {
   let imageLink = "";
@@ -93,7 +87,7 @@ function addCat() {
       imageLink = json.file;
     });
 
-    return cat = {image:imageLink, cat:true, dog:false, fox:false};
+    return cat = {name:"cat", image:imageLink, cat:true, dog:false, fox:false};
 }
 
 function addDog() {
@@ -109,7 +103,7 @@ function addDog() {
       imageLink = json.url;
     });
 
-    return dog = {image:imageLink, cat:false, dog: true, fox:false};
+    return dog = {name:"dog", image:imageLink, cat:false, dog: true, fox:false};
 }
 
 function addFox() {
@@ -125,7 +119,7 @@ function addFox() {
       imageLink = json.image;
     });
 
-    return fox = {image:imageLink, cat:false, dog: false, fox:true};
+    return fox = {name:"fox", image:imageLink, cat:false, dog: false, fox:true};
 }
 
 
@@ -157,6 +151,12 @@ function buildArray() {
     totalAnimals++;
   }
 }
+let results = "";
+for (let i = 0; i < 9; i++) {
+  results += '<p>' + animalArray[i] + '</p>';
+  results += '<img src="' + animalArray[i].imageLink + '"/>';
+}
+document.getElementById("image").innerHTML = results;
 
 function scrambleArray() {
   for (let i = 0; i < 8; i++) {
