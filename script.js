@@ -141,7 +141,17 @@ function addAnimal(whichAnimal, amountOfAnimal) {
     }
   }
 }
-
+function addAnimal(whichAnimal) {
+    if (whichAnimal === 0) {
+      await animalArray.push(addCat());
+    }
+    else if (whichAnimal === 1) {
+      await animalArray.push(addDog());
+    }
+    else if (whichAnimal === 2) {
+      await animalArray.push(addFox());
+    }
+}
 
 function setMainAnimal() {
   mainAnimal = animalChooser();
