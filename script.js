@@ -70,9 +70,15 @@ fetch(AxolotlURL, {
       document.getElementById("image").innerHTML += results;
     });
 */
+function animalChooser() {
+  return Math.random() * NumberOfAnimals;
+}
+
 const NumberOfAnimals = 3;
-const SelectedAnimal = math.random() * 3;// 0 = cats, 1 = dogs, 2 = foxes
+const SelectedAnimal = animalChooser();// 0 = cats, 1 = dogs, 2 = foxes
 //animal = {image:"somelink.png",cat:false, dog:false, fox:false} and other animals if we get them working
+let mainAnimal = {cat:false, dog:false, fox: true};
+let animalArray;
 
 function addCat() {
   let imageLink = "";
@@ -120,4 +126,44 @@ function addFox () {
     });
 
     return fox = {image:imageLink, cat:false, dog: false, fox:true};
+}
+
+function chooseMainAnimal () {
+  let animal = animalChooser();
+  if (animal === 0) {
+    mainAnimal.cat = true;
+  }
+  else if (animal === 1) {
+    mainAnimal.dog = true;
+  }
+  else if (animal === 2) {
+    mainAnimal.fox = true;
+  }
+}
+
+function pickAnimalAmount (animalNum) {
+  let amount = (Math.random() * animalNum) + 1;
+  return amount;
+}
+
+function buildArray () {
+  let totalAnimals = 0;
+  chooseMainAnimal();
+  totalAnimals = pickAnimalAmount(9);
+
+  for (let i = 0; i < totalAnimals; i++) {
+    if (mainAnimal.cat === true) {
+      animalArray.push(addCat());
+    }
+    else if (mainAnimal.dog === true) {
+      animalArray.push(addDog());
+    }
+    else if (mainAnimal === true) {
+      animalArray.push(addFox());
+    }
+  }
+
+  while (totalAnimals != 9) {
+    //todo: add have chose which animal to use then set a number of how much of that via a for loop untill the array has 9 objects.
+  }
 }
