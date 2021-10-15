@@ -1,7 +1,3 @@
-
-
-
-
 const AxolotlURL = "https://axoltlapi.herokuapp.com/";//random each time?
 //const BearURL = "https://placebear.com/"; //height/width of pixels
 const CatURL = "https://aws.random.cat/meow";//Random each time;
@@ -10,60 +6,7 @@ const DuckURL = "https://random-d.uk/api/v2/random";//Random each time
 const FoxURL = "https://randomfox.ca/floof/";//Random each time
 const ShibaURL = "http://shibe.online/api/shibes?count=";//[1-100]&urls=[true/false]&httpsUrls=[true/false]
 
-let results = "";
 
-/*  I don't have the knowledge to know if this server is broken or if I don't have the
-    knowledge to know that it is broken.
-*/
-/*
-fetch(AxolotlURL, {
-  mode: 'cors',
-  headers: {
-    'Access-Control-Allow-Origin':'*'
-  }
-  })
-  .then(function(response) {
-    console.log(response);
-    return response.json();
-  }).then (function(json) {
-    console.log(json);
-
-    let results = "";
-    results += '<img src="' + json.url + '">"';
-
-    document.getElementById("image").innerHTML = results;
-  });
-  */
-
-//Doesn't work Maybe, not sure;
-/*
-      fetch(DuckURL)
-        .then(function(response) {
-          console.log(response);
-          return response.json();
-        }).then (function(json) {
-          console.log(json);
-
-          results += '<img src="' + json.url + '">';
-
-          document.getElementById("image").innerHTML += results;
-        });
-*/
-
-// has access control allow origin issues
-/*
-  fetch(ShibaURL + "count=1&urls=true")
-    .then(function(response) {
-      console.log(response);
-      return response.json();
-    }).then (function(json) {
-      console.log(json);
-
-      results += '<img src="' + json[0] + '">';
-
-      document.getElementById("image").innerHTML += results;
-    });
-*/
 function animalChooser() {
   return Math.random() * NumberOfAnimals;
 }
@@ -86,7 +29,7 @@ function addCat() {
 
       imageLink = json.file;
     });
-
+    console.log(imageLink);
     return cat = {name:"cat", image:imageLink, cat:true, dog:false, fox:false};
 }
 
@@ -102,7 +45,7 @@ function addDog() {
 
       imageLink = json.url;
     });
-
+    console.log(imageLink);
     return dog = {name:"dog", image:imageLink, cat:false, dog: true, fox:false};
 }
 
@@ -118,20 +61,20 @@ function addFox() {
 
       imageLink = json.image;
     });
-
+    console.log(imageLink);
     return fox = {name:"fox", image:imageLink, cat:false, dog: false, fox:true};
 }
 
 
 function addAnimal(whichAnimal) {
     if (whichAnimal === 0) {
-      await animalArray.push(addCat());
+       animalArray.push(addCat());
     }
     else if (whichAnimal === 1) {
-      await animalArray.push(addDog());
+       animalArray.push(addDog());
     }
     else if (whichAnimal === 2) {
-      await animalArray.push(addFox());
+       animalArray.push(addFox());
     }
 }
 
@@ -145,18 +88,19 @@ function buildArray() {
   setMainAnimal();
   addAnimal(mainAnimal);
 
-  while (totalAnimals != 9) {
-    //todo: add have chose which animal to use then set a number of how much of that via a for loop untill the array has 9 objects.
+  while (totalAnimals != 10) {
     addAnimal(animalChooser());
     totalAnimals++;
   }
 }
+
 let results = "";
 for (let i = 0; i < 9; i++) {
-  results += '<p>' + animalArray[i] + '</p>';
-  results += '<img src="' + animalArray[i].imageLink + '"/>';
+  results += '<p>' + animalArray[i].name + '</p>';
+  results += '<img src="' + animalArray[i].image + '"/>';
 }
 document.getElementById("image").innerHTML = results;
+
 
 function scrambleArray() {
   for (let i = 0; i < 8; i++) {
