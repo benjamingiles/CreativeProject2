@@ -7,10 +7,7 @@ const FoxURL = "https://randomfox.ca/floof/";//Random each time
 const ShibaURL = "http://shibe.online/api/shibes?count=";//[1-100]&urls=[true/false]&httpsUrls=[true/false]
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 0b8bb3a577be40a0b05ea0f27c5ff28111de2ccd
 function animalChooser() {
   return Math.random() * NumberOfAnimals;
 }
@@ -98,10 +95,7 @@ function buildArray() {
   }
 }
 
-<<<<<<< HEAD
-=======
 let results = "";
->>>>>>> 0b8bb3a577be40a0b05ea0f27c5ff28111de2ccd
 for (let i = 0; i < 9; i++) {
   results += '<p>' + animalArray[i].name + '</p>';
   results += '<img src="' + animalArray[i].image + '"/>';
