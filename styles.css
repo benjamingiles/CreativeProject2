@@ -1,1 +1,5 @@
-style
+img {
+  display: block;
+  max-width: 500px;
+  height: auto;
+}
