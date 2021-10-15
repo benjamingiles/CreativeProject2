@@ -20,12 +20,14 @@ function animalChooser() {
 async function addCat() {
   let imageLink = "";
 
+/*
   let response = await fetch(CatURL);
   console.log(response);
   let json = await response.json();
   console.log(json);
   imageLink = json.file;
   console.log(imageLink);
+  */
 
   await fetch(CatURL)
     .then(function(response) {
@@ -37,7 +39,7 @@ async function addCat() {
       imageLink = json.file;
     });
     console.log(imageLink);
-    return cat = {name:"cat", image:imageLink, cat:true, dog:false, fox:false};
+    return cat = {name:"Cat", image:imageLink, cat:true, dog:false, fox:false};
 }
 
 async function addDog() {
@@ -53,7 +55,7 @@ async function addDog() {
       imageLink = json.url;
     });
     console.log(imageLink);
-    return dog = {name:"dog", image:imageLink, cat:false, dog: true, fox:false};
+    return dog = {name:"Dog", image:imageLink, cat:false, dog: true, fox:false};
 }
 
 async function addFox() {
@@ -69,7 +71,7 @@ async function addFox() {
       imageLink = json.image;
     });
     console.log(imageLink);
-    return fox = {name:"fox", image:imageLink, cat:false, dog: false, fox:true};
+    return fox = {name:"Fox", image:imageLink, cat:false, dog: false, fox:true};
 }
 
 
@@ -85,6 +87,33 @@ async function addAnimal(whichAnimal) {
     }
 }
 
+let currentAnimal;
+
+if (SelectedAnimal === 0) {
+  currentAnimal = "Cat";
+}
+if (SelectedAnimal === 1) {
+  currentAnimal = "Dog";
+}
+if (SelectedAnimal === 2) {
+  currentAnimal = "Fox";
+}
+
+//this is the onclick function but I can't figure out how to make it very well
+function clickFunction(position) {
+
+  let output = "";
+
+  if (animalArray[position].name == currentAnimal) {
+    output += '<h2>Correct</h2>';
+  }
+  else {
+    output += '<h2>Wrong</h2>';
+  }
+
+  output += '<h2>' + animalArray[position].name + '</h2>';
+  document.getElementById("selected").innerHTML = output;
+}
 
 async function buildArray() {
   let totalAnimals = 1;
@@ -94,10 +123,16 @@ async function buildArray() {
     await addAnimal(animalChooser());
     totalAnimals++;
   }
+
   let results = "";
+
+results += '<h1>Click on every ' + currentAnimal + '</h1>';
+
   for (let i = 0; i < 9; i++) {
-    results += '<p>' + animalArray[i].name + '</p>';
-    results += '<img src="' + animalArray[i].image + '"/>';
+    //results += '<p>' + animalArray[i].name + '</p>';
+
+    //added the onclick function but I couldn't get it to work
+    results += '<img id="imgSize" onclick="clickFunction(' + i + ')" src="' + animalArray[i].image + '"/>';
   }
   document.getElementById("image").innerHTML = results;
 }
