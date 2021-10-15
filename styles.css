@@ -1,5 +1,13 @@
-#imgSize {
+img {
   width: 400px;
   height: 500px;
   padding: 20px;
+}
+
+.imgChange {
+  background-color: blue;
+}
+
+.imgNormal {
+  background-color: white;
 }

@@ -39,7 +39,7 @@ async function addCat() {
       imageLink = json.file;
     });
     console.log(imageLink);
-    return cat = {name:"Cat", image:imageLink, cat:true, dog:false, fox:false};
+    return cat = {name:"Cat", image:imageLink, cat:true, dog:false, fox:false, same:false};
 }
 
 async function addDog() {
@@ -55,7 +55,7 @@ async function addDog() {
       imageLink = json.url;
     });
     console.log(imageLink);
-    return dog = {name:"Dog", image:imageLink, cat:false, dog: true, fox:false};
+    return dog = {name:"Dog", image:imageLink, cat:false, dog: true, fox:false, same:false};
 }
 
 async function addFox() {
@@ -71,7 +71,7 @@ async function addFox() {
       imageLink = json.image;
     });
     console.log(imageLink);
-    return fox = {name:"Fox", image:imageLink, cat:false, dog: false, fox:true};
+    return fox = {name:"Fox", image:imageLink, cat:false, dog: false, fox:true, same:false};
 }
 
 
@@ -99,8 +99,12 @@ if (SelectedAnimal === 2) {
   currentAnimal = "Fox";
 }
 
-//this is the onclick function but I can't figure out how to make it very well
+
+let selectedArray = [];
+//this is the onclick function that adds pictures to an array
 function clickFunction(position) {
+
+  document.getElementById('imgSize' + position).setAttribute('class', 'imgChange');
 
   let output = "";
 
@@ -111,10 +115,35 @@ function clickFunction(position) {
     output += '<h2>Wrong</h2>';
   }
 
+//this checks if the image has already been clicked on and if not then it adds to selectedArray
+  for (let i = 0; i < selectedArray.length; ++i) {
+    if (selectedArray[i].image === animalArray[position].image) {
+      animalArray[position].same = true;
+    }
+  }
+
+  if (animalArray[position].same === false) {
+    selectedArray.push(animalArray[position]);
+  }
+
+//if the image has already been clicked on then this removes it from the array
+  if (animalArray[position].same === true) {
+    for (let i = 0; i < selectedArray.length; ++i) {
+      if (selectedArray[i].image === animalArray[position].image) {
+        selectedArray.splice(i, 1);
+        document.getElementById('imgSize' + position).setAttribute('class', 'imgNormal');
+        animalArray[position].same = false;
+      }
+    }
+  }
+
+  console.log(selectedArray);
+
   output += '<h2>' + animalArray[position].name + '</h2>';
   document.getElementById("selected").innerHTML = output;
 }
 
+//this function builds an array for the pictures of each animal
 async function buildArray() {
   let totalAnimals = 1;
   await addAnimal(SelectedAnimal);
@@ -132,13 +161,29 @@ results += '<h1>Click on every ' + currentAnimal + '</h1>';
     //results += '<p>' + animalArray[i].name + '</p>';
 
     //added the onclick function but I couldn't get it to work
-    results += '<img id="imgSize" onclick="clickFunction(' + i + ')" src="' + animalArray[i].image + '"/>';
+    results += '<img id="imgSize' + i + '" onclick="clickFunction(' + i + ')" src="' + animalArray[i].image + '"/>';
   }
   document.getElementById("image").innerHTML = results;
 }
+
 buildArray();
 
+//this function is for the submit button
+function submit() {
+  let correct = true;
+  for (let i = 0; i < selectedArray.length; ++i) {
+    if (selectedArray[i].name !== currentAnimal) {
+      correct = false;
+    }
+  }
 
+  if (correct === false) {
+    document.getElementById("selected").innerHTML = "<h1>Wrong</h1>";
+  }
+  else {
+    document.getElementById("selected").innerHTML = "<h1>Correct</h1>";
+  }
+}
 
 function scrambleArray() {
   for (let i = 0; i < 8; i++) {
