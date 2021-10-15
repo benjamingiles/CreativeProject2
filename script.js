@@ -20,12 +20,20 @@ function animalChooser() {
 async function addCat() {
   let imageLink = "";
 /* a cleaner aproach to the results
-  let response = await fetch(CatURL);
-  console.log(response);
-  let json = await response.json();
-  console.log(json);
-  imageLink = json.file;
-  console.log(imageLink);
+async function addCat() {
+let imageLink = "";
+
+let response = await fetch(CatURL);
+console.log(response);
+
+let json = await response.json();
+console.log(json);
+
+imageLink = json.file;
+console.log(imageLink);
+
+return cat = {name:"cat", image:imageLink, cat:true, dog:false, fox:false};
+}
 */
   await fetch(CatURL)
     .then(function(response) {
