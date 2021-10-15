@@ -12,58 +12,7 @@ const ShibaURL = "http://shibe.online/api/shibes?count=";//[1-100]&urls=[true/fa
 
 let results = "";
 
-/*  I don't have the knowledge to know if this server is broken or if I don't have the
-    knowledge to know that it is broken.
-*/
-/*
-fetch(AxolotlURL, {
-  mode: 'cors',
-  headers: {
-    'Access-Control-Allow-Origin':'*'
-  }
-  })
-  .then(function(response) {
-    console.log(response);
-    return response.json();
-  }).then (function(json) {
-    console.log(json);
 
-    let results = "";
-    results += '<img src="' + json.url + '">"';
-
-    document.getElementById("image").innerHTML = results;
-  });
-  */
-
-//Doesn't work Maybe, not sure;
-/*
-      fetch(DuckURL)
-        .then(function(response) {
-          console.log(response);
-          return response.json();
-        }).then (function(json) {
-          console.log(json);
-
-          results += '<img src="' + json.url + '">';
-
-          document.getElementById("image").innerHTML += results;
-        });
-*/
-
-// has access control allow origin issues
-/*
-  fetch(ShibaURL + "count=1&urls=true")
-    .then(function(response) {
-      console.log(response);
-      return response.json();
-    }).then (function(json) {
-      console.log(json);
-
-      results += '<img src="' + json[0] + '">';
-
-      document.getElementById("image").innerHTML += results;
-    });
-*/
 function animalChooser() {
   return Math.random() * NumberOfAnimals;
 }
@@ -151,7 +100,7 @@ function buildArray() {
     totalAnimals++;
   }
 }
-let results = "";
+
 for (let i = 0; i < 9; i++) {
   results += '<p>' + animalArray[i] + '</p>';
   results += '<img src="' + animalArray[i].imageLink + '"/>';
