@@ -29,7 +29,6 @@ h1 {
   background-color: white;
   width: 150px;
   height: 150px;
-
 }
 
 
@@ -59,8 +58,7 @@ button {
   font-size: 30px;
 }
 .button {
-
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .footer {

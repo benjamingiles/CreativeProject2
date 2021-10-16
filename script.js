@@ -145,8 +145,7 @@ function clickFunction(position) {
 
   console.log(selectedArray);
 
-  output += '<h2>' + animalArray[position].name + '</h2>';
-  document.getElementById("selected").innerHTML = output;
+
 }
 
 //this function builds an array for the pictures of each animal
@@ -202,10 +201,10 @@ function submit() {
   }
 
   if (correct === false) {
-    document.getElementById("selected").innerHTML = "<h1>Wrong</h1>";
+    document.getElementById("selected").innerHTML = "<h1>You might be a robot.</h1>";
   }
   else {
-    document.getElementById("selected").innerHTML = "<h1>Correct</h1>";
+    document.getElementById("selected").innerHTML = "<h1>You are not a robot.</h1>";
   }
 }
 
