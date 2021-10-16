@@ -41,6 +41,7 @@ h1 {
   background-color: white;
   border: 2px solid white;
   border-radius: 5px;
+  justify-content: center;
 }
 
 .image {
@@ -50,6 +51,16 @@ h1 {
   grid-template: auto auto auto auto auto / 1fr 1fr ;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
+}
+
+button {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  font-size: 30px;
+}
+.button {
+
+    padding-left: 20px;
 }
 
 .footer {
