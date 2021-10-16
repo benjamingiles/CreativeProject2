@@ -1,7 +1,7 @@
 //const AxolotlURL = "https://axoltlapi.herokuapp.com/";//random each time?
 //const BearURL = "https://placebear.com/"; //height/width of pixels
 const CatURL = "https://aws.random.cat/meow";//Random each time;
-const DogURL = "https://random.dog/woof.json"; //Random each time;
+const DogURL = "https://random.dog/woof.json?include=png,jpeg,gif,svg,jpg"; //Random each time;
 //const DuckURL = "https://random-d.uk/api/v2/random";//Random each time
 const FoxURL = "https://randomfox.ca/floof/";//Random each time
 //const ShibaURL = "http://shibe.online/api/shibes?count=";//[1-100]&urls=[true/false]&httpsUrls=[true/false]
@@ -12,6 +12,9 @@ const SelectedAnimal = animalChooser();// 0 = cats, 1 = dogs, 2 = foxes
 //animal = {name:"animal name", image:"somelink.png",cat:false, dog:false, fox:false} and other animals if we get them working
 let mainAnimal = 0; // 0 = cats, 1 = dogs, 2 = foxes
 let animalArray = [];
+let numCats = 0;
+let numDogs = 0;
+let numFoxes = 0;
 
 function animalChooser() {
   return Math.floor(Math.random() * NumberOfAnimals);
@@ -39,7 +42,8 @@ async function addCat() {
       imageLink = json.file;
     });
     console.log(imageLink);
-    return cat = {name:"Cat", image:imageLink, cat:true, dog:false, fox:false, same:false};
+    numCats++;
+    return cat = {name:"Cat", image:imageLink, animal:0, cat:true, dog:false, fox:false, same:false};
 }
 
 async function addDog() {
@@ -55,7 +59,8 @@ async function addDog() {
       imageLink = json.url;
     });
     console.log(imageLink);
-    return dog = {name:"Dog", image:imageLink, cat:false, dog: true, fox:false, same:false};
+    numDogs++;
+    return dog = {name:"Dog", image:imageLink, animal:1, cat:false, dog: true, fox:false, same:false};
 }
 
 async function addFox() {
@@ -71,7 +76,8 @@ async function addFox() {
       imageLink = json.image;
     });
     console.log(imageLink);
-    return fox = {name:"Fox", image:imageLink, cat:false, dog: false, fox:true, same:false};
+    numFoxes++;
+    return fox = {name:"Fox", image:imageLink, animal:2, cat:false, dog: false, fox:true, same:false};
 }
 
 
@@ -170,11 +176,29 @@ buildArray();
 
 //this function is for the submit button
 function submit() {
-  let correct = true;
+  let correct = false;
+  let numSelected = selectedArray.length;
   for (let i = 0; i < selectedArray.length; ++i) {
-    if (selectedArray[i].name !== currentAnimal) {
+    if (selectedArray[i].animal !== SelectedAnimal) {
       correct = false;
+      break;
     }
+    else {
+      correct = true;
+    }
+  }
+
+  if (SelectedAnimal === 0) {
+    if (numSelected !== numCats)
+      correct = false;
+  }
+  else if (SelectedAnimal === 1) {
+    if (numSelected !== numDogs)
+      correct = false;
+  }
+  else if (SelectedAnimal === 2) {
+    if (numSelected !== numFoxes)
+      correct = false;
   }
 
   if (correct === false) {
